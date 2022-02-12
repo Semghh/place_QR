@@ -14,13 +14,15 @@ import com.example.test2.Util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
+
 @Service(value = "AdminGroupService")
 public class AdminGroupServiceImpl implements AdminGroupService {
 
-    @Autowired
+    @Resource
     private AdminGroupMapper adminGroupMapper;
 
-    @Autowired
+    @Resource
     private AuthorityStoreTableMapper authorityStoreTableMapper;
 
     @Override

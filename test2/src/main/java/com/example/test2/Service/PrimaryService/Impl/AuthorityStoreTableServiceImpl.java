@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 @Service("AuthorityStoreTableService")
 public class AuthorityStoreTableServiceImpl implements AuthorityStoreTableService {
 
-    @Autowired
+    @Resource
     private AuthorityStoreTableMapper authorityStoreTableMapper;
 
     @Override

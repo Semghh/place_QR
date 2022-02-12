@@ -20,7 +20,7 @@ import java.util.HashMap;
 @RequestMapping(value = "/AdminGroup")
 public class AdminGroupController extends BaseController{
 
-    @Autowired
+    @Resource
     private AdminGroupService adminGroupService;
 
     @PostMapping(value = "/addAdminGroup")

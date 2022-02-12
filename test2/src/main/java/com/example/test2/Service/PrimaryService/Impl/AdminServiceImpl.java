@@ -9,13 +9,15 @@ import com.example.test2.Service.PrimaryService.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
+
 @Service(value = "AdminService")
 public class AdminServiceImpl implements AdminService {
 
-    @Autowired
+    @Resource
     private AdminMapper adminMapper;
 
-    @Autowired
+    @Resource
     private AdminGroupMapper adminGroupMapper;
 
     @Override
