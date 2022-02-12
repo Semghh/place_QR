@@ -33,6 +33,25 @@ public class RiskReportRecordMapperTests {
 
     @Test
     public void deleteRiskReportRecordById(){
+        System.out.println(riskReportRecordMapper.deleteRiskReportRecordById(2L));
+    }
 
+    @Test
+    public void updateRiskReportRecordById(){
+        RiskReportRecord riskReportRecord=new RiskReportRecord();
+        riskReportRecord.setReport_time(System.currentTimeMillis());
+        riskReportRecord.setReport_state(1);
+        riskReportRecord.setReport_person_id(1L);
+        riskReportRecord.setResult("ahhhh");
+        riskReportRecord.setApply_type("normal");
+        riskReportRecord.setPlace_id(1L);
+        riskReportRecord.setType(1);
+        riskReportRecord.setId(3L);
+        System.out.println(riskReportRecordMapper.updateRiskReportRecordById(riskReportRecord));
+    }
+
+    @Test
+    public void selectRiskReportRecordById(){
+        System.out.println(riskReportRecordMapper.selectRiskReportRecordById(3L));
     }
 }

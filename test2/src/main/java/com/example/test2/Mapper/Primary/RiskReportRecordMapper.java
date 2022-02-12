@@ -9,8 +9,8 @@ public interface RiskReportRecordMapper {
 
     int deleteRiskReportRecordById(@Param("id") Long id);
 
-    int updateRiskReportRecordById(@Param("id") Long id);
+    int updateRiskReportRecordById(RiskReportRecord riskReportRecord);
 
-    int selectRiskReportRecordById(@Param("id") Long id);
+    RiskReportRecord selectRiskReportRecordById(@Param("id") Long id);
 
 }

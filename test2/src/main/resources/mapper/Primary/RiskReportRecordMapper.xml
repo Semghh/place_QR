@@ -7,11 +7,11 @@
                values (#{apply_type},#{place_id},#{type},#{report_time},#{report_person_id},#{report_state},#{result})
     </insert>
 
-    <update id="updateRiskReportRecordById" parameterType="java.lang.Long">
+    <update id="updateRiskReportRecordById" parameterType="com.example.test2.POJO.RiskReportRecord">
         update risk_report_record set
-                apply_type=#{apply_type},place_id=#{place_id},type=#{type}
-                report_time=#{report_time},report_person_id=#{report_person_id},
-                report_state=#{report_state},result=#{result}
+              apply_type=#{apply_type},place_id=#{place_id},type=#{type},
+              report_time=#{report_time},report_person_id=#{report_person_id},
+              report_state=#{report_state},result=#{result}
         where id=#{id}
     </update>
 
@@ -19,7 +19,7 @@
         delete from risk_report_record where id=#{id}
     </delete>
 
-    <select id="selectRiskReportRecordById" resultType="java.lang.Integer" parameterType="java.lang.Long">
+    <select id="selectRiskReportRecordById" resultType="com.example.test2.POJO.RiskReportRecord" parameterType="java.lang.Long">
         select id,apply_type,place_id,type,report_time,report_person_id,report_state,result
           from risk_report_record
          where id=#{id}
