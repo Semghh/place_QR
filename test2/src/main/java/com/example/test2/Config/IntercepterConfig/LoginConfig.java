@@ -8,16 +8,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 //@Configuration
-public class LoginConfig implements WebMvcConfigurer {
-
-    @Override
-    public void addInterceptors(InterceptorRegistry registry) {
-
-        List<String> excludePath=new ArrayList<>();
-        excludePath.add("/Admin/login");
-
-        registry.addInterceptor(new LoginInterceptor())
-                .excludePathPatterns(excludePath)
-                .addPathPatterns("/**");
-    }
-}
+//public class LoginConfig implements WebMvcConfigurer {
+//
+//    @Override
+//    public void addInterceptors(InterceptorRegistry registry) {
+//
+//        List<String> excludePath=new ArrayList<>();
+//        excludePath.add("/Admin/login");
+//
+//        registry.addInterceptor(new LoginInterceptor())
+//                .excludePathPatterns(excludePath)
+//                .addPathPatterns("/**");
+//    }
+//}

@@ -1,5 +1,6 @@
 package com.example.test2.Controllers.PrimayController;
 
+import com.example.test2.Controllers.BaseController;
 import com.example.test2.Service.PrimaryService.ConsoleRedisService;
 import com.example.test2.Service.PrimaryService.Impl.ConsoleRedisServiceImpl;
 import com.example.test2.Util.JsonResult;
@@ -11,7 +12,7 @@ import java.util.HashMap;
 
 @RestController
 @RequestMapping("/console")
-public class ConsoleController {
+public class ConsoleController extends BaseController {
 
     @Resource
     private ConsoleRedisService consoleRedisService;
@@ -39,5 +40,8 @@ public class ConsoleController {
         map.put("curRiskPlaceTotal",curRiskPlaceTotal);
         return JsonResult.getInstance(200,"获取成功!",map);
     }
+
+
+
 
 }

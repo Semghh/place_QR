@@ -5,8 +5,14 @@ import org.apache.ibatis.annotations.Param;
 
 public interface AuthorityStoreTableMapper {
 
-    int insertAuthorityStoreTable(AuthorityStoreTable authorityStoreTable);
+    public int insertAuthorityStoreTable(AuthorityStoreTable authorityStoreTable);
 
-    AuthorityStoreTable selectAuthorityStoreTableById(@Param("id") Long id);
+    public AuthorityStoreTable selectAuthorityStoreTableById(@Param("id") Long id);
+
+    public int isExistTableById(Long id);
+
+    public int dynamicUpdate(AuthorityStoreTable storeTable);
+
+    public int insertIncludeId(AuthorityStoreTable storeTable);
 
 }

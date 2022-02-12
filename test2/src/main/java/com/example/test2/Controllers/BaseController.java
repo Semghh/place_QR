@@ -20,6 +20,9 @@ public class BaseController {
         if(e instanceof InsertException){
             jsonResult.setState(2000);
         }
+        else {
+            jsonResult.setState(500);
+        }
         return jsonResult;
     }
 

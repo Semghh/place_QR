@@ -1,7 +1,7 @@
 package com.example.test2.Config;
 
 import com.alibaba.druid.pool.DruidDataSource;
-import com.example.test2.Interceptor.LoginInterceptor;
+//import com.example.test2.Interceptor.LoginInterceptor;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.annotation.MapperScan;
@@ -20,9 +20,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Configuration
-
 @MapperScan(basePackages = PrimaryDataSourceConfig.PACKAGE ,sqlSessionFactoryRef = "primarySqlSessionFactory")
-public class PrimaryDataSourceConfig implements WebMvcConfigurer {
+public class PrimaryDataSourceConfig {
 
     static final String PACKAGE = "com.example.test2.Mapper.Primary";
 
@@ -69,13 +68,4 @@ public class PrimaryDataSourceConfig implements WebMvcConfigurer {
         return sqlSessionFactory.getObject();
     }
 
-    @Override
-    public void addInterceptors(InterceptorRegistry registry) {
-        List<String> excludePath=new ArrayList<>();
-        excludePath.add("/Admin/login");
-        excludePath.add("/Admin/register");
-        registry.addInterceptor(new LoginInterceptor())
-                .excludePathPatterns(excludePath)
-                .addPathPatterns("/**");
-    }
 }

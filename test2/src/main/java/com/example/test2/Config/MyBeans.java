@@ -1,6 +1,7 @@
 package com.example.test2.Config;
 
 import com.example.test2.POJO.Area;
+import com.example.test2.POJO.Authority;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.DeserializationFeature;
@@ -76,6 +77,46 @@ public class MyBeans {
         Area a3 = Area.builder().id(18L).area_level(3).father(a1).risk_level(1).children(null).name("a3").build();
         a1.setChildren(new Area[]{a2,a3});
         return a1;
+    }
+
+
+    @Bean("authorityTree")
+    public Authority[] getAuthority(){
+        Authority platform = Authority.builder().id(2L).name("总览").type(2).build();
+        Authority riskInfo  = Authority.builder().id(3L).name("风险统计").type(2).build();
+        Authority console = Authority.builder().id(1L).name("控制台").type(1).children(new Authority[]{platform,riskInfo}).build();
+
+
+        Authority adminer = Authority.builder().id(5L).name("管理员操作").type(2).build();
+        Authority adminLog = Authority.builder().id(6L).name("管理员日志").type(2).build();
+        Authority adminGroupControl = Authority.builder().id(7L).name("管理组").type(2).build();
+        Authority authControl = Authority.builder().id(4L).name("权限管理").type(1).children(new Authority[]{adminer,adminLog,adminGroupControl}).build();
+
+
+
+        Authority userList = Authority.builder().id(8L).name("用户列表").type(2).build();
+        Authority userControl = Authority.builder().id(9L).name("用户管理").type(1).children(new Authority[]{userList}).build();
+
+
+        Authority placeForCar = Authority.builder().id(10L).name("车类场所").type(2).build();
+        Authority placeForNormal = Authority.builder().id(11L).name("普通场所").type(2).build();
+        Authority placeApply = Authority.builder().id(12L).name("场所码申报").type(2).build();
+        Authority placeControl = Authority.builder().id(13L).name("场所管理").type(1).children(new Authority[]{placeForCar,placeForNormal,placeApply}).build();
+
+
+        Authority riskReport = Authority.builder().id(14L).name("风险上报").type(2).build();
+        Authority placeReport = Authority.builder().id(15L).name("风险场所").type(2).build();
+        Authority reportControl = Authority.builder().id(16L).name("举报管理").type(1).children(new Authority[]{riskReport,placeReport}).build();
+
+
+        Authority sendNotice = Authority.builder().id(17L).name("发布公告").type(2).build();
+        Authority noticeHistory = Authority.builder().id(18L).name("历史公告").type(2).build();
+        Authority noticeControl = Authority.builder().id(19L).name("公告管理").type(1).children(new Authority[]{sendNotice,noticeHistory}).build();
+
+        Authority[] res = {
+                console, authControl, userControl, placeControl, reportControl, noticeControl
+        };
+        return res;
     }
 
 }

@@ -30,6 +30,10 @@ public class JsonResult<T> {
         return new JsonResult(state,message,data);
     }
 
+    public static<T> JsonResult getInstance(Integer state, Throwable e, T data){
+        return new JsonResult(state,e.getMessage(),data);
+    }
+
     public JsonResult(Integer state){
         this.state=state;
     }

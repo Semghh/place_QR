@@ -3,13 +3,39 @@
 <mapper namespace="com.example.test2.Mapper.Primary.AuthorityStoreTableMapper">
 
     <insert id="insertAuthorityStoreTable" parameterType="com.example.test2.POJO.AuthorityStoreTable">
-        insert into authority_store_table(name,url,icon,children,type)
+        insert into authority_store_table(`name`,url,icon,children,`type`)
                values (#{name},#{url},#{icon},#{children},#{type})
     </insert>
+    <insert id="insertIncludeId">
+        insert into authority_store_table
+            (`id`,`name`,url,icon,children,`type`)
+        values (#{id},#{name},#{url},#{icon},#{children},#{type})
+    </insert>
+
 
     <select id="selectAuthorityStoreTableById" resultType="com.example.test2.POJO.AuthorityStoreTable"
             parameterType="java.lang.Long">
-        select id,name,url,icon,children,type from authority_store_table where id=#{id}
+        select id,`name`,url,icon,children,`type`
+        from authority_store_table
+        where id=#{id}
     </select>
+    <select id="isExistTableById" resultType="java.lang.Integer">
+        select count(*)
+        from  `authority_store_table`
+        where id=#{id}
+        limit 1
+    </select>
+
+    <update id="dynamicUpdate">
+        update `authority_store_table`
+        <set>
+            <if test="name !=null">`name`=#{name},</if>
+            <if test="url !=null">`url`=#{url},</if>
+            <if test="icon !=null">`icon`=#{icon},</if>
+            <if test="children !=null">`children`=#{children},</if>
+            <if test="type !=null">`type`=#{type},</if>
+        </set>
+        where `id`=#{id}
+    </update>
 
 </mapper>

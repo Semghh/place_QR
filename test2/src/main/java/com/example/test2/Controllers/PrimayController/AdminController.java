@@ -1,12 +1,10 @@
 package com.example.test2.Controllers;
 
-import com.example.test2.Controllers.Exception.ParameIsNullException;
+import com.example.test2.Controllers.Exception.ParamIsNullException;
 import com.example.test2.POJO.Admin;
 import com.example.test2.Service.PrimaryService.AdminService;
 import com.example.test2.Util.JsonResult;
 import com.example.test2.Util.ParameterUtil;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -39,7 +37,7 @@ public class AdminController extends BaseController{
     public JsonResult<Void> register(Admin admin){
         admin.setId(-1L);
         if(!ParameterUtil.parameterCheck(admin)){
-            throw new ParameIsNullException("指定参数不能为空");
+            throw new ParamIsNullException("指定参数不能为空");
         }
         adminService.register(admin);
         return new JsonResult<>(OK);
@@ -51,7 +49,7 @@ public class AdminController extends BaseController{
         params.add(newPassword);
         params.add(oldPassword);
         if(!ParameterUtil.parameterCheck(params)){
-            throw new ParameIsNullException("指定参数不能为空");
+            throw new ParamIsNullException("指定参数不能为空");
         }
         Long id= (Long) session.getAttribute("id");
         adminService.changePassword(id, newPassword, oldPassword);

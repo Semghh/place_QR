@@ -1,10 +1,13 @@
 package com.example.test2.Controllers;
 
 import com.example.test2.POJO.Area;
+import com.example.test2.POJO.Authority;
 import com.example.test2.POJO.Result;
 import com.example.test2.Service.PrimaryService.AreaStoreService;
+import com.example.test2.Service.PrimaryService.AuthorityStoreTableService;
 import com.example.test2.Service.PrimaryService.PlaceForNormalService;
 import com.example.test2.Service.SecondaryService.QRRecordsService;
+import com.example.test2.Util.JsonResult;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +23,13 @@ public class HelloController {
     private QRRecordsService qrRecordsService;
     private PlaceForNormalService placeForNormalService;
     private AreaStoreService areaStoreService;
+
+    @Resource
+    private AuthorityStoreTableService authorityStoreTableService;
+
+    @Resource(name = "authorityTree")
+    private Authority[] authTree ;
+
 
     @Resource(name = "myArea")
     private Area area;
@@ -49,6 +59,18 @@ public class HelloController {
         HashMap<Object, Object> map = new HashMap<>();
         map.put("成功插入次数",i);
         return Result.getInstance(200,"调用成功",i);
+    }
+
+
+    @RequestMapping("/doInsert123")
+    public JsonResult doInsert1(){
+        int res = 0;
+        for (int i = 0; i < authTree.length; i++) {
+            res += authorityStoreTableService.convertToStore(authTree[i], true);
+        }
+        HashMap<Object, Object> map = new HashMap<>();
+        map.put("更改记录结果条数",res);
+        return JsonResult.getInstance(200,"插入成功",map);
     }
 
 }
