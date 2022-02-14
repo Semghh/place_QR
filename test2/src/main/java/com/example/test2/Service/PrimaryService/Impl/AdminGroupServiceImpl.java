@@ -10,6 +10,9 @@ import com.example.test2.Util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+
 @Service(value = "AdminGroupService")
 public class AdminGroupServiceImpl implements AdminGroupService {
 
@@ -62,7 +65,8 @@ public class AdminGroupServiceImpl implements AdminGroupService {
             throw new GroupNotFoundException("分组数据不存在");
         }
         Long[] temp=StringUtil.getArray(adminGroupStore.getAuthority_collection());
-        AdminGroup adminGroup=adminGroupStorageConversion(adminGroupStore);
+        //AdminGroup adminGroup=adminGroupStorageConversion(adminGroupStore);
+        AdminGroup adminGroup= (AdminGroup) storageConversion(adminGroupStore,AdminGroup.class);
         Authority[] authority_collection=new Authority[temp.length];
         for(int i=0;i<temp.length;i++){
             authority_collection[i]=createMenu(temp[i]);
@@ -76,7 +80,8 @@ public class AdminGroupServiceImpl implements AdminGroupService {
         if(authorityStoreTable ==null){
             throw new AuthorityNotFoundException("权限数据不存在");
         }
-        Authority authority =authorityStorageConversion(authorityStoreTable);
+        //Authority authority =authorityStorageConversion(authorityStoreTable);
+        Authority authority= (Authority) storageConversion(authorityStoreTable,Authority.class);
         if(authorityStoreTable.getChildren()==null|| authorityStoreTable.getChildren().equals("")){
             authority.setChildren(null);
         }else{
@@ -90,23 +95,47 @@ public class AdminGroupServiceImpl implements AdminGroupService {
         return authority;
     }
 
-    private Authority authorityStorageConversion(AuthorityStoreTable authorityStoreTable){
-        Authority authority =new Authority();
-        authority.setId(authorityStoreTable.getId());
-        authority.setName(authorityStoreTable.getName());
-        authority.setUrl(authorityStoreTable.getUrl());
-        authority.setIcon(authorityStoreTable.getIcon());
-        authority.setType(authorityStoreTable.getType());
-        return authority;
-    }
+//    private Authority authorityStorageConversion(AuthorityStoreTable authorityStoreTable){
+//        Authority authority =new Authority();
+//        authority.setId(authorityStoreTable.getId());
+//        authority.setName(authorityStoreTable.getName());
+//        authority.setUrl(authorityStoreTable.getUrl());
+//        authority.setIcon(authorityStoreTable.getIcon());
+//        authority.setType(authorityStoreTable.getType());
+//        return authority;
+//    }
+//
+//    private AdminGroup adminGroupStorageConversion(AdminGroupStore adminGroupStore){
+//        AdminGroup adminGroup=new AdminGroup();
+//        adminGroup.setGroup_name(adminGroupStore.getGroup_name());
+//        adminGroup.setComment(adminGroupStore.getComment());
+//        adminGroup.setId(adminGroupStore.getId());
+//        adminGroup.setAuthority_collection(null);
+//        return adminGroup;
+//    }
 
-    private AdminGroup adminGroupStorageConversion(AdminGroupStore adminGroupStore){
-        AdminGroup adminGroup=new AdminGroup();
-        adminGroup.setGroup_name(adminGroupStore.getGroup_name());
-        adminGroup.setComment(adminGroupStore.getComment());
-        adminGroup.setId(adminGroupStore.getId());
-        adminGroup.setAuthority_collection(null);
-        return adminGroup;
+    //存储转换内存工具，测试阶段只有类型相同的字段才可以转换，不同的跳过
+    private Object storageConversion(Object data,Class cls){
+        Object value=null;
+        try {
+            value=cls.getDeclaredConstructor().newInstance();
+            Field[] fields=data.getClass().getDeclaredFields();
+            for (Field field:fields){
+                String filedName=field.getName();
+                Field temp= cls.getDeclaredField(filedName);
+                String methodName="set"+filedName.substring(0,1).toUpperCase()+filedName.substring(1);
+                Method method= cls.getDeclaredMethod(methodName,temp.getType());
+                if(temp.getType()==field.getType()){
+                    field.setAccessible(true);
+                    method.invoke(value,field.get(data));
+                }else{
+                    method.invoke(value,(Object) null);
+                }
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return value;
     }
 
     @Override
