@@ -1,6 +1,6 @@
 package com.example.test2.Controllers;
 
-import com.example.test2.Controllers.Exception.ParameIsNullException;
+import com.example.test2.Controllers.Exception.ParamIsNullException;
 import com.example.test2.POJO.RiskReportRecord;
 import com.example.test2.Service.PrimaryService.RiskReportRecordService;
 import com.example.test2.Util.JsonResult;
@@ -28,7 +28,7 @@ public class RiskReportRecordController extends BaseController{
     public JsonResult<Void> addRiskReportRecord(RiskReportRecord riskReportRecord){
         riskReportRecord.setId(-1L);
         if(!ParameterUtil.parameterCheck(riskReportRecord)){
-            throw new ParameIsNullException("指定参数不能为空");
+            throw new ParamIsNullException("指定参数不能为空");
         }
         riskReportRecordService.addRiskReportRecord(riskReportRecord);
         return new JsonResult<>(OK);
@@ -43,7 +43,7 @@ public class RiskReportRecordController extends BaseController{
     @PostMapping(value = "/changeRiskReportRecordById")
     public JsonResult<Void> changeRiskReportRecordById(RiskReportRecord riskReportRecord){
         if(!ParameterUtil.parameterCheck(riskReportRecord)){
-            throw new ParameIsNullException("指定参数不能为空");
+            throw new ParamIsNullException("指定参数不能为空");
         }
         riskReportRecordService.changeRiskReportRecordById(riskReportRecord);
         return new JsonResult<>(OK);

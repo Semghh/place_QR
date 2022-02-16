@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.test2.Mapper.Primary.AreaStoreTableMapper">
+    <insert id="insertNewAreaStore">
+        insert into `area`
+        (`name`,`risk_level`,`area_level`,`children`,`father_id`)
+        values(#{name},#{risk_level},#{area_level},#{children},#{father_id})
+    </insert>
+    <update id="dynamicUpdate">
+        update `area`
+        <set>
+            <if test="name !=null">`name`=#{name},</if>
+            <if test="risk_level !=null">`risk_level`=#{risk_level},</if>
+            <if test="area_level !=null">`area_level`=#{area_level},</if>
+            <if test="children !=null">`children`=#{children},</if>
+            <if test="father_id !=null">`father_id`=#{father_id}</if>
+        </set>
+        where `id`=#{id}
+    </update>
+
+
+    <select id="getAreaById" resultType="com.example.test2.POJO.AreaStoreTable">
+        select *
+        from `area`
+        where `id`=#{id}
+        limit 1
+    </select>
+    <select id="isExistArea" resultType="java.lang.Integer">
+        select count(*)
+        from `area`
+        where `id`=#{id}
+        limit 1
+    </select>
+    <select id="getLastId" resultType="java.lang.Long">
+        select `id`
+        from `area`
+        order by `id` desc
+        limit 1
+    </select>
+</mapper>

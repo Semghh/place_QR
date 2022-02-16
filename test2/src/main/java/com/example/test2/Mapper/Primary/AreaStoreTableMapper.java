@@ -11,4 +11,8 @@ public interface AreaStoreTableMapper {
     public int isExistArea(Long area_id);
 
     public int insertNewAreaStore(AreaStoreTable store);
+
+    public Long getLastId();
+
+    public int dynamicUpdate(AreaStoreTable storeTable);
 }
