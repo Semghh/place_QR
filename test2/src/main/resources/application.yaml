@@ -40,3 +40,9 @@ mybatis:
 
 page:
   pageSize: 5
+
+log:
+  logCode:
+    insertCode: 1
+    updateCode: 2
+    deleteCode: 3

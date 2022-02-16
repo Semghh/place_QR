@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.test2.Mapper.Primary.LogAdminOperationMapper">
+
+    <insert id="insertLogAdminOperation" parameterType="com.example.test2.POJO.LogAdminOperation">
+        insert into log_admin_operation(admin_id,username,method_path,type,operation_time)
+        values (#{admin_id},#{username},#{method_path},#{type},#{operation_time})
+    </insert>
+
+    <select id="count" resultType="java.lang.Long" parameterType="java.lang.Long">
+        select count(*) from log_admin_operation
+        <if test="admin_id!=null">where admin_id=#{admin_id}</if>
+    </select>
+
+    <select id="selectByAll" resultType="com.example.test2.POJO.LogAdminOperation">
+        select id,admin_id,username,method_path,type,operation_time
+        from log_admin_operation
+        <if test="admin_id!=null">where admin_id=#{admin_id}</if>
+        order by operation_time desc
+        limit #{currentPage},#{pageSize}
+    </select>
+</mapper>

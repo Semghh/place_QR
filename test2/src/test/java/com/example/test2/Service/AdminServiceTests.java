@@ -21,7 +21,7 @@ public class AdminServiceTests {
         admin.setUsername("af2");
         admin.setPassword("12345");
         admin.setGroup_id(1L);
-        adminService.register(admin);
+        adminService.addAdmin(admin);
     }
 
     @Test

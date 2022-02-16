@@ -18,13 +18,13 @@ public class LogAdminLoginServiceImpl implements LogAdminLoginService {
 
     private final LogAdminLoginMapper logAdminLoginMapper;
 
+    @Value("${page.pageSize}")
+    private Integer pageSize;
+
     @Autowired
     public LogAdminLoginServiceImpl(LogAdminLoginMapper logAdminLoginMapper) {
         this.logAdminLoginMapper = logAdminLoginMapper;
     }
-
-    @Value("${page.pageSize}")
-    private Integer pageSize;
 
     @Override
     public void addLogAdminLogin(LogAdminLogin adminLogin) {

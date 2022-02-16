@@ -4,7 +4,7 @@ import com.example.test2.POJO.Admin;
 
 public interface AdminService {
 
-    void register(Admin admin);
+    void addAdmin(Admin admin);
 
     Admin login(String username,String password);
 

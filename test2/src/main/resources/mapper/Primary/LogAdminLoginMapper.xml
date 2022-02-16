@@ -16,6 +16,7 @@
         select id,admin_id,username,login_time
         from log_admin_login
         <if test="admin_id!=null">where admin_id=#{admin_id}</if>
+        order by login_time desc
         limit #{currentPage},#{pageSize}
     </select>
 
