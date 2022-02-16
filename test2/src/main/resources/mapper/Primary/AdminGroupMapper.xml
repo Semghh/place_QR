@@ -20,4 +20,9 @@
             where id=#{id}
     </select>
 
+    <select id="selectByAll" resultType="com.example.test2.POJO.AdminGroupStore">
+        select id,group_name,authority_collection,comment
+        from admin_group
+    </select>
+
 </mapper>

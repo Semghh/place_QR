@@ -21,7 +21,7 @@ public class AdminServiceImpl implements AdminService {
     private AdminGroupMapper adminGroupMapper;
 
     @Override
-    public void register(Admin admin) {
+    public void addAdmin(Admin admin) {
         Admin temp=adminMapper.selectAdminByUsername(admin.getUsername());
         if(temp!=null){
             throw new UsernameDuplicatedException("用户名已被占用");

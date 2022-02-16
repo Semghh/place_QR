@@ -39,7 +39,7 @@ public class AdminController extends BaseController{
         if(!ParameterUtil.parameterCheck(admin)){
             throw new ParamIsNullException("指定参数不能为空");
         }
-        adminService.register(admin);
+        adminService.addAdmin(admin);
         return new JsonResult<>(OK);
     }
 
