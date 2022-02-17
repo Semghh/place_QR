@@ -17,4 +17,6 @@ public class PageInfo<T> {
     private Long totalSize;
     private List<T> list;
 
+
+
 }

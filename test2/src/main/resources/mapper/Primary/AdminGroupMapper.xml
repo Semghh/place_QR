@@ -9,6 +9,14 @@
                         <if test="comment!=null">#{comment}</if>)
     </insert>
 
+    <update id="updateAdminGroupById" parameterType="com.example.test2.POJO.AdminGroupStore">
+        update admin_group set
+        <if test="group_name!=null">group_name=#{group_name},</if>
+        <if test="authority_collection!=null">authority_collection=#{authority_collection},</if>
+        <if test="comment!=null">comment=#{comment}</if>
+        where id=#{id}
+    </update>
+
     <delete id="deleteAdminGroupById" parameterType="java.lang.Long">
         delete from admin_group where id=#{id}
     </delete>
@@ -23,6 +31,13 @@
     <select id="selectByAll" resultType="com.example.test2.POJO.AdminGroupStore">
         select id,group_name,authority_collection,comment
         from admin_group
+        <if test="id!=null"> where id=#{id}</if>
+        limit #{currentPage},#{pageSize}
+    </select>
+
+    <select id="count" resultType="java.lang.Long" parameterType="java.lang.Long">
+        select count(*) from admin_group
+        <if test="id!=null"> where id=#{id}</if>
     </select>
 
 </mapper>

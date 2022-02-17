@@ -12,8 +12,8 @@ public interface LogAdminOperationMapper {
 
     Long count(@Param("admin_id") Long admin_id);
 
-    ArrayList<LogAdminOperation> selectByAll(@Param("currentPage") int currentPage,
-                                         @Param("pageSize") int pageSize,
+    ArrayList<LogAdminOperation> selectByAll(@Param("currentPage") Integer currentPage,
+                                         @Param("pageSize") Integer pageSize,
                                          @Param("admin_id") Long admin_id);
 
 }

@@ -19,6 +19,7 @@ public class cityTree {
     @Bean("areaTree")
     public Area areaTree(){
         return areaStoreService.convertToArea(1L);
+        //return new Area();
     }
 
 }

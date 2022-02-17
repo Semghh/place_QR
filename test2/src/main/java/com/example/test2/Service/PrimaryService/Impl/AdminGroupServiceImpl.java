@@ -10,11 +10,16 @@ import com.example.test2.Service.Exception.AuthorityNotFoundException;
 import com.example.test2.Service.Exception.GroupDuplicatedException;
 import com.example.test2.Service.Exception.InsertException;
 import com.example.test2.Service.PrimaryService.AdminGroupService;
+import com.example.test2.Util.PageInfo;
+import com.example.test2.Util.PageUtil;
 import com.example.test2.Util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service(value = "AdminGroupService")
 public class AdminGroupServiceImpl implements AdminGroupService {
@@ -24,6 +29,9 @@ public class AdminGroupServiceImpl implements AdminGroupService {
 
     @Resource
     private AuthorityStoreTableMapper authorityStoreTableMapper;
+
+    @Value("${page.pageSize}")
+    private Integer pageSize;
 
     @Override
     public void addAdminGroup(AdminGroupStore adminGroup) {
@@ -95,5 +103,28 @@ public class AdminGroupServiceImpl implements AdminGroupService {
         adminGroup.setId(adminGroupStore.getId());
         adminGroup.setAuthority_collection(null);
         return adminGroup;
+    }
+
+    @Override
+    public PageInfo<AdminGroupStore> queryByAll(Integer currentPage, Integer pageSize, Long id) {
+        if(pageSize==null){
+            pageSize=this.pageSize;
+        }
+        String queryMethodName="selectByAll";
+        String countMethodName="count";
+        Object[] queryParams=new Object[3];
+        Object[] countParams=new Object[1];
+        queryParams[0]=currentPage;
+        queryParams[1]=pageSize;
+        queryParams[2]=id;
+        countParams[0]=id;
+        Class<?>[] queryCls=new Class[3];
+        Class<?>[] countCls=new Class[1];
+        queryCls[0]=Integer.class;
+        queryCls[1]=Integer.class;
+        queryCls[2]=Long.class;
+        countCls[0]=Long.class;
+        PageInfo<AdminGroupStore> pageInfo= PageUtil.listPage(adminGroupMapper,queryMethodName,queryCls,queryParams,countMethodName,countCls,countParams);
+        return pageInfo;
     }
 }

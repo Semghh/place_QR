@@ -4,6 +4,7 @@ import com.example.test2.POJO.AdminGroup;
 import com.example.test2.POJO.AdminGroupStore;
 import com.example.test2.POJO.Authority;
 import com.example.test2.Service.PrimaryService.AdminGroupService;
+import com.example.test2.Util.PageInfo;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,5 +48,11 @@ public class AdminGroupServiceTests {
         for(int i=0;i<children.length;i++){
             dfs(children[i]);
         }
+    }
+
+    @Test
+    public void queryByAll(){
+        PageInfo<AdminGroupStore> pageInfo=adminGroupService.queryByAll(1,null,1L);
+        System.out.println(pageInfo) ;
     }
 }

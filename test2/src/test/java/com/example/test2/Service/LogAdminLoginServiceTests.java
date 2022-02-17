@@ -28,7 +28,7 @@ public class LogAdminLoginServiceTests {
 
     @Test
     public void listPage(){
-        PageInfo<LogAdminLogin> pageInfo=adminLoginService.logLoginlistPage(3,4L);
+        PageInfo<LogAdminLogin> pageInfo=adminLoginService.logLoginlistPage(3,4,4L);
         System.out.println(pageInfo);
         List<LogAdminLogin> list=pageInfo.getList();
         list.forEach(o1-> System.out.println(o1));

@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.annotation.Resource;
 
 @RestController
-@RequestMapping(value = "/AuthorityStoreTable")
+@RequestMapping(value = "/authorityStoreTable")
 public class AuthorityStoreTableController extends BaseController{
 
     @Resource

@@ -1,13 +1,14 @@
-package com.example.test2.Controllers;
+package com.example.test2.Controllers.PrimayController;
 
+import com.example.test2.Controllers.BaseController;
 import com.example.test2.Controllers.Exception.ParamIsNullException;
 import com.example.test2.POJO.Admin;
+import com.example.test2.POJO.AdminGroupStore;
 import com.example.test2.Service.PrimaryService.AdminService;
 import com.example.test2.Util.JsonResult;
+import com.example.test2.Util.PageInfo;
 import com.example.test2.Util.ParameterUtil;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
@@ -16,8 +17,8 @@ import java.util.HashMap;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/Admin")
-public class AdminController extends BaseController{
+@RequestMapping(value = "/admin")
+public class AdminController extends BaseController {
 
     @Resource
     private AdminService adminService;
@@ -62,4 +63,20 @@ public class AdminController extends BaseController{
         adminService.removeAdminById(id);
         return new JsonResult<>(OK);
     }
+
+    @GetMapping(value = "/queryByAll")
+    public JsonResult<HashMap<String, PageInfo<Admin>>>
+            queryByAll(@RequestParam(value = "currentPage",
+            required = false,defaultValue = "1")
+            Integer currentPage,
+            @RequestParam(value = "pageSize",required = false)
+            Integer pageSize,
+            @RequestParam(value = "id",required = false)
+            Long id){
+        PageInfo<Admin> pageInfo=adminService.queryByAll(currentPage, pageSize, id);
+        HashMap<String,PageInfo<Admin>> hashMap=new HashMap<>();
+        hashMap.put("pageInfo",pageInfo);
+        return new JsonResult<>(OK,hashMap);
+    }
+
 }

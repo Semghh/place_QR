@@ -45,4 +45,5 @@ public class AdminGroupMapperTests {
         System.out.println(adminGroupMapper.updateAdminGroupById(adminGroupStore));
     }
 
+
 }

@@ -7,6 +7,7 @@ import com.example.test2.Service.PrimaryService.LogAdminOperationService;
 import com.example.test2.Util.JsonResult;
 import com.example.test2.Util.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -32,8 +33,11 @@ public class LogAdminController extends BaseController{
             logLoginlistPage(@RequestParam(value = "currentPage",
             required = false,defaultValue = "1")
             Integer currentPage,
+            @RequestParam(value = "pageSize",required = false)
+            Integer pageSize,
+            @RequestParam(value = "admin_id",required = false)
             Long admin_id){
-        PageInfo<LogAdminLogin> pageInfo=logAdminLoginService.logLoginlistPage(currentPage,admin_id);
+        PageInfo<LogAdminLogin> pageInfo=logAdminLoginService.logLoginlistPage(currentPage,pageSize,admin_id);
         HashMap<String,PageInfo<LogAdminLogin>> hashMap=new HashMap<>();
         hashMap.put("pageInfo",pageInfo);
         return new JsonResult<>(OK,hashMap);
@@ -44,8 +48,11 @@ public class LogAdminController extends BaseController{
             logOperationlistPage(@RequestParam(value = "currentPage",
             required = false,defaultValue = "1")
             Integer currentPage,
+            @RequestParam(value = "pageSize",required = false)
+            Integer pageSize,
+            @RequestParam(value = "admin_id",required = false)
             Long admin_id){
-        PageInfo<LogAdminOperation> pageInfo=logAdminOperationService.logOperationlistPage(currentPage,admin_id);
+        PageInfo<LogAdminOperation> pageInfo=logAdminOperationService.logOperationlistPage(currentPage,pageSize,admin_id);
         HashMap<String,PageInfo<LogAdminOperation>> hashMap=new HashMap<>();
         hashMap.put("pageInfo",pageInfo);
         return new JsonResult<>(OK,hashMap);

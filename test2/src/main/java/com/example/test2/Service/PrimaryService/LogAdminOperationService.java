@@ -8,6 +8,6 @@ public interface LogAdminOperationService {
 
     void addLogAdminOperation(LogAdminOperation logAdminOperation);
 
-    PageInfo<LogAdminOperation> logOperationlistPage(int currentPage, Long admin_id);
+    PageInfo<LogAdminOperation> logOperationlistPage(int currentPage,Integer pageSize, Long admin_id);
 
 }

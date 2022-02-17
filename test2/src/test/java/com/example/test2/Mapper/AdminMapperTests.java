@@ -2,6 +2,7 @@ package com.example.test2.Mapper;
 
 import com.example.test2.Mapper.Primary.AdminMapper;
 import com.example.test2.POJO.Admin;
+import com.example.test2.Util.PageInfo;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,4 +44,5 @@ public class AdminMapperTests {
     public void deleteAdminById(){
         System.out.println(adminMapper.deleteAdminById(2L));
     }
+
 }

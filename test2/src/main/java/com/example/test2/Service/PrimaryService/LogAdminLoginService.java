@@ -9,5 +9,5 @@ public interface LogAdminLoginService {
 
     void addLogAdminLogin(LogAdminLogin adminLogin);
 
-    PageInfo<LogAdminLogin> logLoginlistPage(int currentPage, Long admin_id);
+    PageInfo<LogAdminLogin> logLoginlistPage(Integer currentPage,Integer pageSize, Long admin_id);
 }

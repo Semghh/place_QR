@@ -6,6 +6,7 @@ import com.example.test2.POJO.LogAdminOperation;
 import com.example.test2.Service.Exception.InsertException;
 import com.example.test2.Service.PrimaryService.LogAdminOperationService;
 import com.example.test2.Util.PageInfo;
+import com.example.test2.Util.PageUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -34,16 +35,26 @@ public class LogAdminOperationServiceImpl implements LogAdminOperationService {
     }
 
     @Override
-    public PageInfo<LogAdminOperation> logOperationlistPage(int currentPage, Long admin_id) {
-        ArrayList<LogAdminOperation> list=logAdminOperationMapper.selectByAll((currentPage-1)*pageSize,pageSize,admin_id);
-        PageInfo<LogAdminOperation> pageInfo=new PageInfo<>();
-        pageInfo.setList(list);
-        pageInfo.setPageSize(pageSize);
-        pageInfo.setCurrentPage(currentPage);
-        Long totalSize=logAdminOperationMapper.count(admin_id);
-        Integer totalPage= Math.toIntExact(totalSize % pageSize == 0 ? (totalSize / pageSize) : ((totalSize / pageSize) + 1));
-        pageInfo.setTotalPage(totalPage);
-        pageInfo.setTotalSize(totalSize);
+    public PageInfo<LogAdminOperation> logOperationlistPage(int currentPage,Integer pageSize, Long admin_id) {
+        if(pageSize==null){
+            pageSize=this.pageSize;
+        }
+        String queryMethodName="selectByAll";
+        String countMethodName="count";
+        Object[] queryParams=new Object[3];
+        queryParams[0]=currentPage;
+        queryParams[1]=pageSize;
+        queryParams[2]=admin_id;
+        Object[] countParams=new Object[1];
+        countParams[0]=admin_id;
+        Class<?>[] queryCls=new Class[3];
+        Class<?>[] countCls=new Class[1];
+        queryCls[0]=Integer.class;
+        queryCls[1]=Integer.class;
+        queryCls[2]=Long.class;
+        countCls[0]=Long.class;
+        PageInfo<LogAdminOperation> pageInfo= PageUtil.listPage(logAdminOperationMapper,queryMethodName,queryCls,
+                                     queryParams,countMethodName,countCls,countParams);
         return pageInfo;
     }
 }

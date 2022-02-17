@@ -2,6 +2,7 @@ package com.example.test2.Service;
 
 import com.example.test2.POJO.Admin;
 import com.example.test2.Service.PrimaryService.AdminService;
+import com.example.test2.Util.PageInfo;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,5 +38,23 @@ public class AdminServiceTests {
     @Test
     public void removeAdminById(){
         adminService.removeAdminById(3L);
+    }
+
+    @Test
+    public void queryAdminByInGroupId(){
+        PageInfo<Admin> pageInfo=adminService.queryAdminByInGroupId(1,null,null,1L);
+        System.out.println(pageInfo);
+    }
+
+    @Test
+    public void queryAdminByNotInGroupId(){
+        PageInfo<Admin> pageInfo=adminService.queryAdminByNotInGroupId(1,null,null,1L);
+        System.out.println(pageInfo);
+    }
+
+    @Test
+    public void queryByAll(){
+        PageInfo<Admin> pageInfo=adminService.queryByAll(1,null,2L);
+        System.out.println(pageInfo);
     }
 }

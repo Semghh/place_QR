@@ -28,4 +28,12 @@ public class ParameterUtil {
         }
         return true;
     }
+
+    public static Object[] setParams(List params){
+        Object[] res=new Object[params.size()];
+        for (int i = 0; i < params.size(); i++) {
+            res[i]=params.get(i);
+        }
+        return res;
+    }
 }

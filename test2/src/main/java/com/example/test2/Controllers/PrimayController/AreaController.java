@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import sun.awt.image.ImageWatched;
+//import sun.awt.image.ImageWatched;
 
 import javax.annotation.Resource;
 import java.util.HashMap;

@@ -15,5 +15,10 @@ public interface AdminGroupMapper {
 
     int updateAdminGroupById(AdminGroupStore adminGroupStore);
 
-    List<AdminGroupStore> selectByAll();
+    Long count(@Param("id") Long id);
+
+    List<AdminGroupStore> selectByAll(@Param("currentPage") Integer currentPage,
+                                      @Param("pageSize") Integer pageSize,
+                                      @Param("id") Long id);
+
 }

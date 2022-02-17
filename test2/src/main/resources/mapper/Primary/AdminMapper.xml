@@ -12,6 +12,10 @@
         update admin set password=<if test="password!=null">#{password}</if> where id=#{id}
     </update>
 
+    <update id="updateGroupIdById" parameterType="java.lang.Long">
+        update admin set group_id=#{group_id} where id=#{id}
+    </update>
+
     <delete id="deleteAdminById" parameterType="java.lang.Long">
         delete from admin where id=#{id}
     </delete>
@@ -26,5 +30,46 @@
     <select id="selectAdminById" resultType="com.example.test2.POJO.Admin" parameterType="java.lang.Long">
         select id,username,password,group_id from admin where id=#{id}
     </select>
+
+    <select id="selectAdminByInGroupId" resultType="com.example.test2.POJO.Admin">
+        select id,username,group_id
+        from admin
+        where group_id=#{group_id}
+        <if test="id!=null"> and id=#{id}</if>
+        limit #{currentPage},#{pageSize}
+    </select>
+
+    <select id="selectAdminByNotInGroupId" resultType="com.example.test2.POJO.Admin">
+        select id,username,group_id
+        from admin
+        where group_id!=#{group_id}
+        <if test="id!=null"> and id=#{id}</if>
+        limit #{currentPage},#{pageSize}
+    </select>
+
+    <select id="selectByAll" resultType="com.example.test2.POJO.Admin">
+        select id,username,group_id
+        from admin
+        <if test="id!=null">where id=#{id}</if>
+        limit #{currentPage},#{pageSize}
+    </select>
+
+    <select id="countInGroupId" resultType="java.lang.Long" parameterType="java.lang.Long">
+        select count(*) from admin
+        where group_id=#{group_id}
+        <if test="id!=null"> and id=#{id}</if>
+    </select>
+
+    <select id="countNotInGroupId" resultType="java.lang.Long">
+        select count(*) from admin
+        where group_id!=#{group_id}
+        <if test="id!=null"> and id=#{id}</if>
+    </select>
+
+    <select id="count" resultType="java.lang.Long" parameterType="java.lang.Long">
+        select count(*) from admin
+        <if test="id!=null">where id=#{id}</if>
+    </select>
+
 
 </mapper>
