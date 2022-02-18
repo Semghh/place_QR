@@ -8,7 +8,6 @@ import com.example.test2.Service.Exception.*;
 import com.example.test2.Service.PrimaryService.AdminService;
 import com.example.test2.Util.PageInfo;
 import com.example.test2.Util.PageUtil;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -34,7 +33,7 @@ public class AdminServiceImpl implements AdminService {
         }
         AdminGroupStore adminGroup =adminGroupMapper.selectAdminGroupById(admin.getGroup_id());
         if(adminGroup==null){
-            throw new GroupDuplicatedException("分组数据不存在");
+            throw new GroupNotFoundException("分组数据不存在");
         }
         Integer rows=adminMapper.insertAdmin(admin);
         if(rows!=1){

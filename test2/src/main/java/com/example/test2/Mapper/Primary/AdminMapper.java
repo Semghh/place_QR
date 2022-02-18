@@ -25,6 +25,8 @@ public interface AdminMapper {
 
     Long count(@Param("id") Long id);
 
+    Long countAdminByGroupId(@Param("group_id") Long group_id);
+
     ArrayList<Admin> selectAdminByInGroupId(@Param("currentPage") Integer currentPage,
                                             @Param("pageSize") Integer pageSize,
                                             @Param("id") Long id,

@@ -71,5 +71,10 @@
         <if test="id!=null">where id=#{id}</if>
     </select>
 
+    <select id="countAdminByGroupId" resultType="java.lang.Long" parameterType="java.lang.Long">
+        select count(*) from admin
+        where group_id=#{group_id}
+    </select>
+
 
 </mapper>

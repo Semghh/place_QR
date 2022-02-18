@@ -44,6 +44,12 @@ public class AdminGroupController extends BaseController{
         return new JsonResult<>(OK,hashMap);
     }
 
+    @PostMapping(value = "/removeAdminGroupById")
+    public JsonResult<Void> removeAdminGroupById(Long id){
+        adminGroupService.removeAdminGroupById(id);
+        return new JsonResult<>(OK);
+    }
+
     @GetMapping(value = "/queryByAll")
     public JsonResult<HashMap<String, PageInfo<AdminGroupStore>>>
     queryByAll(@RequestParam(value = "currentPage",
