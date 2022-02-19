@@ -14,4 +14,6 @@ public interface AdminGroupService {
 
     PageInfo<AdminGroupStore> queryByAll(Integer currentPage, Integer pageSize, Long id);
 
+    void changeAdminGroupById(AdminGroupStore adminGroupStore);
+
 }

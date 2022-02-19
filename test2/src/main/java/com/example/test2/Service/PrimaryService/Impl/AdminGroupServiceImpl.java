@@ -65,6 +65,17 @@ public class AdminGroupServiceImpl implements AdminGroupService {
         }
     }
 
+    public void changeAdminGroupById(AdminGroupStore adminGroupStore){
+        AdminGroupStore adminGroupStore1=adminGroupMapper.selectAdminGroupById(adminGroupStore.getId());
+        if(adminGroupStore1==null){
+            throw new GroupNotFoundException("分组数据不存在");
+        }
+        int rows=adminGroupMapper.updateAdminGroupById(adminGroupStore);
+        if(rows!=1){
+            throw new UpdateException("更新数据时未知异常");
+        }
+    }
+
     public AdminGroup resultMenu(Long id){
         AdminGroupStore adminGroupStore=adminGroupMapper.selectAdminGroupById(id);
         if(adminGroupStore==null){

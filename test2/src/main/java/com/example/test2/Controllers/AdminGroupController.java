@@ -12,6 +12,7 @@ import com.example.test2.Util.ParameterUtil;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 
@@ -36,17 +37,27 @@ public class AdminGroupController extends BaseController{
     }
 
     @GetMapping(value = "/resultMenu")
-    public JsonResult<HashMap<String,AdminGroup>> resultMenu(HttpSession session){
+    public JsonResult<HashMap<String,AdminGroup>> resultMenu(HttpSession session, HttpServletRequest request){
         Long id= (Long) session.getAttribute("group_id");
         AdminGroup adminGroup=adminGroupService.resultMenu(id);
+        putMenuFromServletContext(adminGroup,request);
         HashMap<String,AdminGroup> hashMap=new HashMap<>();
         hashMap.put("adminGroup",adminGroup);
         return new JsonResult<>(OK,hashMap);
     }
 
     @PostMapping(value = "/removeAdminGroupById")
-    public JsonResult<Void> removeAdminGroupById(Long id){
+    public JsonResult<Void> removeAdminGroupById(Long id,HttpServletRequest request){
         adminGroupService.removeAdminGroupById(id);
+        removeMenuFromServletContext(id,request);
+        return new JsonResult<>(OK);
+    }
+
+    @PostMapping(value = "/changeAdminGroupById")
+    public JsonResult<Void> changeAdminGroupById(AdminGroupStore adminGroupStore,HttpServletRequest request){
+        adminGroupService.changeAdminGroupById(adminGroupStore);
+        AdminGroup adminGroup=adminGroupService.resultMenu(adminGroupStore.getId());
+        putMenuFromServletContext(adminGroup,request);
         return new JsonResult<>(OK);
     }
 
